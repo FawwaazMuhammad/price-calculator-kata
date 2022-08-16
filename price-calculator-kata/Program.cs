@@ -28,7 +28,9 @@
         var priceAfterTax = price + taxAmount;
         var discountAmount = DiscountAmount(price,discount);
         var totalPrice = priceAfterTax - discountAmount;
-        PrintTaxMessage(Name,UPC, price, totalPrice,tax,discount,taxAmount,discountAmount);
+        PrintTaxMessageWithDiscount(Name,UPC, price, totalPrice,tax,discount,taxAmount,discountAmount);
+        PrintTaxMessageWithoutDiscount(Name,UPC, price, totalPrice,tax,taxAmount,priceAfterTax);
+
 
 
     }
@@ -38,12 +40,23 @@
     }
    
 
-    private static void PrintTaxMessage(string Name,double upc, decimal price, decimal totalPrice,decimal tax,decimal discount,decimal taxAmount,decimal discountAmount)
+    private static void PrintTaxMessageWithDiscount(string Name,double upc, decimal price, decimal totalPrice,decimal tax,decimal discount,decimal taxAmount,decimal discountAmount)
     {
+        Console.WriteLine("case 1 \n");
+        Console.WriteLine("With Discount");
         Console.WriteLine($"Sample Product:  {Name}, UPC : {upc} reported as ${price} \n");
         Console.WriteLine($"Tax: {tax}%,Discount: {discount}");
         Console.WriteLine($"Tax amount = ${taxAmount.ToString("#.##")}; Discount amount = ${discountAmount.ToString("#.##")}");
         Console.WriteLine($"Price before = ${price.ToString("#.##")}, price after = ${totalPrice.ToString("#.##")}");
+    }
+    private static void PrintTaxMessageWithoutDiscount(string Name,double upc, decimal price, decimal totalPrice,decimal tax,decimal taxAmount,decimal priceAfterTax)
+    {
+        Console.WriteLine("case 2 \n");
+        Console.WriteLine("Without Discount");
+        Console.WriteLine($"Sample Product:  {Name}, UPC : {upc} reported as ${price} \n");
+        Console.WriteLine($"Tax: {tax}%,No Discount");
+        Console.WriteLine($"Tax amount = ${taxAmount.ToString("#.##")}; No Discount");
+        Console.WriteLine($"Price before = ${price.ToString("#.##")}, price after = ${priceAfterTax.ToString("#.##")}");
     }
     private static decimal DiscountAmount(decimal priceAfterTax, decimal discountAmount)
     {
